@@ -1,16 +1,14 @@
 package com.example.demo.entity;
 
 import com.example.demo.enums.Gender;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 public class Patient {
@@ -35,6 +33,9 @@ public class Patient {
     private String phone_number;
 
     private String email;
+
+    @ManyToOne
+    private Address address;
 
 
 

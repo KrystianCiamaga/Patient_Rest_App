@@ -15,6 +15,8 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -27,12 +29,13 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     @Transactional
-    public List<PatientDto> findAll() {
-        List<Patient> allPatients = patientRepository.findAll();
-        List<PatientDto> patientDtos = new ArrayList<>();
-        allPatients.forEach(patient -> patientDtos.add(PatientMapper.mapPatientToPatientDto(patient)));
+    public Set<PatientDto> findAll() {
 
-        return patientDtos;
+        return patientRepository.findAll()
+                .stream()
+                .map(PatientMapper::mapPatientToPatientDto)
+                .collect(Collectors.toSet());
+
 }
 
     @Override

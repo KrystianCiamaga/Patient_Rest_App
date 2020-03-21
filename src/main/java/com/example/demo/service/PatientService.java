@@ -4,12 +4,13 @@ import com.example.demo.dto.PatientDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 
 public interface PatientService {
 
 
-    List<PatientDto> findAll();
+    Set<PatientDto> findAll();
 
     PatientDto findById(Long id) throws Exception;
 
