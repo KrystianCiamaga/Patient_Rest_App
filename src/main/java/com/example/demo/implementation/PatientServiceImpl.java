@@ -51,7 +51,10 @@ public class PatientServiceImpl implements PatientService {
     @Override
     @Transactional
     public PatientDto updatePatient(Long id, PatientDto patientDto) {
-        return null;
+        Patient patient = patientRepository.getOne(id);
+        Patient newPatient = PatientMapper.mapPatientDtoToPatient(patient, patientDto);
+        patientRepository.save(newPatient);
+        return patientDto;
     }
 
     @Override

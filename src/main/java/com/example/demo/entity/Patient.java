@@ -37,6 +37,9 @@ public class Patient {
     @ManyToOne
     private Address address;
 
+    @OneToOne
+    private Account account;
+
 
 
 }

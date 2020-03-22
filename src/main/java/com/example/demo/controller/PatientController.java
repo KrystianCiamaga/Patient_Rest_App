@@ -42,6 +42,11 @@ public class PatientController {
          patientService.deleteById(id);
     }
 
+    @PutMapping("/{id}")
+    public PatientDto updatePatient(@PathVariable Long id, @RequestBody PatientDto patientDto) {
+        return patientService.updatePatient(id, patientDto);
+    }
+
 
 
 }

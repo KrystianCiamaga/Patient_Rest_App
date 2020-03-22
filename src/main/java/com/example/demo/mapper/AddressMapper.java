@@ -10,7 +10,6 @@ public class AddressMapper {
 
         AddressDto addressDto=new AddressDto();
 
-
         addressDto.setCountry(address.getCountry());
         addressDto.setHouse_number(address.getHouse_number());
         addressDto.setPlace(address.getPlace());

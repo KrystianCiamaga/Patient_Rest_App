@@ -14,7 +14,6 @@ public interface PatientService {
 
     PatientDto findById(Long id) throws Exception;
 
-
     PatientDto updatePatient(Long id, PatientDto patientDto);
 
     void deleteById(Long id);

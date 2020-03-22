@@ -43,12 +43,14 @@ public class AddressServiceImpl implements AddressService {
         return addressDto;
     }
 
+
     @Override
     @Transactional
     public AddressDto updateAddress(Long id, AddressDto locationDto) {
 
-       Address newAddress= AddressMapper.mapAddressDtoToAddress(addressRepository.getOne(id),locationDto);
+       Address address= addressRepository.getOne(id);
 
+       Address newAddress = AddressMapper.mapAddressDtoToAddress(address,locationDto);
         addressRepository.save(newAddress);
 
         return locationDto;
@@ -59,4 +61,7 @@ public class AddressServiceImpl implements AddressService {
     public void delete(Long id) {
 
     }
+
+
+
 }
