@@ -20,17 +20,21 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+
     private String login;
 
     private String password;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private Patient patient;
 
-    @OneToMany(mappedBy = "account")
-    private Set<Authority> authorities;
+    @OneToMany(mappedBy = "account",fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private Set<Authority> authoritySet;
 
     private boolean isEnabled;
+
+
+
 
 
 }

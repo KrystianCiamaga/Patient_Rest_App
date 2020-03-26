@@ -4,6 +4,7 @@ import com.example.demo.enums.Gender;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,8 +20,6 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
-
     private String first_name;
 
     private String last_name;
@@ -34,10 +33,17 @@ public class Patient {
 
     private String email;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Address address;
 
-    @OneToOne
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "patients_medicines",
+    joinColumns = @JoinColumn(name = "patient_id"),inverseJoinColumns = @JoinColumn(name = "medicine_id"))
+    private List<Medicine> medicineList;
+
+
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY, mappedBy = "patient")
     private Account account;
 
 

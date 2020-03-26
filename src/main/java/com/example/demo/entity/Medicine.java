@@ -5,25 +5,27 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class Authority implements GrantedAuthority {
+@NoArgsConstructor
+public class Medicine {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String authority;
 
-    @ManyToOne()
-    private Account account;
+    private String name;
+
+    private int dose;
+
+
 
 }

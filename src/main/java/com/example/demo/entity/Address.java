@@ -3,12 +3,12 @@ package com.example.demo.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Getter
 @Setter
-@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 public class Address {
@@ -27,8 +27,8 @@ public class Address {
 
     private String country;
 
-    @OneToMany
-    private Set<Patient> patient;
+    @OneToMany(mappedBy = "address")
+    private List<Patient> patient;
 
 
 
