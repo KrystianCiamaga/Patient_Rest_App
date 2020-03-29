@@ -6,6 +6,7 @@ import com.example.demo.entity.Authority;
 import org.assertj.core.util.Sets;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public class AccountMapper {
@@ -19,12 +20,15 @@ public class AccountMapper {
         if(account.getId() != null){
 
             accountDto.setLogin(account.getLogin());
-            accountDto.setPassword(account.getLogin());
+            accountDto.setPassword(account.getPassword());
+
         }
 
         return accountDto;
 
     }
+
+
 
     private static Account getAccount(AccountDto accountDto){
 
@@ -42,6 +46,15 @@ public class AccountMapper {
         account.setAuthoritySet(set);
 
         return account;
+
+    }
+
+
+    public static Account mapAccountDtoToAccount(AccountDto accountDto) {
+
+        return Optional.ofNullable(accountDto)
+                .map(AccountMapper::getAccount)
+                .orElse(null);
 
     }
 

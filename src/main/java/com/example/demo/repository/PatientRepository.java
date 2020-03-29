@@ -14,4 +14,7 @@ public interface PatientRepository extends JpaRepository<Patient,Long> {
     Optional<Patient> findByPesel(String pesel);
 
 
+    boolean existsPatientByAccount_Login(String login);
+
+
 }

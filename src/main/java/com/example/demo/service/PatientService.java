@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.MedicineDto;
 import com.example.demo.dto.PatientDto;
 import org.springframework.stereotype.Service;
 
@@ -19,5 +20,7 @@ public interface PatientService {
     void deleteById(Long id);
 
     Long addPatient(PatientDto patientDto, String username);
+
+    Long addMedicines(Long id, MedicineDto medicineDto);
 
 }

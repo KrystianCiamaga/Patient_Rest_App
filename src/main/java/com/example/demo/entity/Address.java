@@ -27,7 +27,7 @@ public class Address {
 
     private String country;
 
-    @OneToMany(mappedBy = "address")
+    @OneToMany(mappedBy = "address",cascade = CascadeType.ALL)
     private List<Patient> patient;
 
 

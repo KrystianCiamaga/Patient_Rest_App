@@ -1,19 +1,21 @@
 package com.example.demo.implementation;
 
 
+import com.example.demo.dto.MedicineDto;
 import com.example.demo.dto.PatientDto;
+import com.example.demo.entity.Account;
+import com.example.demo.entity.Medicine;
 import com.example.demo.entity.Patient;
+import com.example.demo.exception.PatientNotFoundException;
+import com.example.demo.mapper.MedicineMapper;
 import com.example.demo.mapper.PatientMapper;
+import com.example.demo.repository.AccountRepository;
+import com.example.demo.repository.MedicineRepository;
 import com.example.demo.repository.PatientRepository;
 import com.example.demo.service.PatientService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -23,9 +25,18 @@ import java.util.stream.Collectors;
 public class PatientServiceImpl implements PatientService {
 
 
-    @Autowired
+
     private PatientRepository patientRepository;
 
+    private AccountRepository accountRepository;
+
+    private MedicineRepository medicineRepository;
+
+    public PatientServiceImpl(PatientRepository patientRepository, AccountRepository accountRepository, MedicineRepository medicineRepository) {
+        this.patientRepository = patientRepository;
+        this.accountRepository = accountRepository;
+        this.medicineRepository = medicineRepository;
+    }
 
     @Override
     @Transactional
@@ -36,15 +47,15 @@ public class PatientServiceImpl implements PatientService {
                 .map(PatientMapper::mapPatientToPatientDto)
                 .collect(Collectors.toSet());
 
-}
+    }
 
     @Override
     @Transactional
     public PatientDto findById(Long id) throws Exception {
 
-        Optional<Patient> patient=patientRepository.findById(id);
+        Optional<Patient> patient = patientRepository.findById(id);
 
-        return PatientMapper.mapPatientToPatientDto(patient.get());
+        return PatientMapper.mapPatientToPatientDto(patient.orElseThrow(() -> new PatientNotFoundException(id)));
     }
 
 
@@ -59,15 +70,33 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     @Transactional
-    public void deleteById( Long id)
-    {
+    public void deleteById(Long id) {
         patientRepository.deleteById(id);
     }
 
 
-
     @Override
     public Long addPatient(PatientDto patientDto, String username) {
-        return null;
+
+        Account account=accountRepository.findByLogin(username);
+        Patient patient = account.getPatient();
+        Patient afterMapping = PatientMapper.mapPatientDtoToPatient(patient,patientDto);
+        account.setPatient(afterMapping);
+        Account newAccount= accountRepository.save(account);
+
+        return newAccount.getPatient().getId();
+    }
+
+    @Override
+    @Transactional
+    public Long addMedicines(Long id, MedicineDto medicineDto) {
+
+        Medicine newMedicine=new Medicine();
+        Medicine medicine = MedicineMapper.mapMedicineDtoToMedicine(newMedicine,medicineDto);
+        Optional<Patient> patient = patientRepository.findById(id);
+        patient.orElseThrow(() ->new PatientNotFoundException(id)).addMedicine(medicine);
+        medicineRepository.save(medicine);
+
+        return medicine.getId();
     }
 }

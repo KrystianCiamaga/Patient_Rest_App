@@ -26,6 +26,9 @@ public class Demo implements CommandLineRunner {
     private PatientRepository patientRepository;
 
     @Autowired
+    private AddressRepository addressRepository;
+
+    @Autowired
     private MedicineRepository medicineRepository;
 
     public Demo(AccountRepository accountRepository, PatientRepository patientRepository, AddressRepository addressRepository, AuthorityRepository authorityRepository) {
@@ -99,9 +102,53 @@ public class Demo implements CommandLineRunner {
 
         patient.setMedicineList(lista);
 
+        Account account1=new Account();
+
+        account1.setPassword(passwordEncoder.encode("password"));
+        account1.setLogin("ola");
+        account1.setEnabled(true);
+
+
+        Patient patient1=new Patient();
+
+        patient1.setEmail("wojon@o2.pl");
+        patient1.setFirst_name("Ola");
+        patient1.setGender(Gender.Female);
+        patient1.setPesel("75323632");
+        patient1.setLast_name("Kowalska");
+        patient1.setPhone_number("63434734734");
+
+        Authority authority1=new Authority();
+
+        authority1.setAuthority("ROLE_USER");
+        authority1.setAccount(account1);
+
+        Set<Authority> secik2=new HashSet<>();
+        secik2.add(authority1);
+
+        account1.setAuthoritySet(secik2);
+
+        //patient1.setMedicineList(lista);
+
+
+        patient1.setAccount(account1);
+
+        patient1.setAddress(address);
+
+        account1.setPatient(patient1);
+
+        //patientRepository.save(patient1);
+
+
+        addressRepository.save(address);
 
         patientRepository.save(patient);
+        patientRepository.save(patient1);
+
+
         accountRepository.save(account);
+        accountRepository.save(account1);
+
 
 
 

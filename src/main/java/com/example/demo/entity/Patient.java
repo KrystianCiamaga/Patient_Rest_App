@@ -33,7 +33,7 @@ public class Patient {
 
     private String email;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Address address;
 
 
@@ -45,6 +45,15 @@ public class Patient {
 
     @OneToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY, mappedBy = "patient")
     private Account account;
+
+
+
+    public void addMedicine(Medicine medicine){
+
+        medicineList.add(medicine);
+
+
+    }
 
 
 
