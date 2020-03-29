@@ -1,6 +1,5 @@
-package com.example.demo.exception;
+package com.example.demo.exception.PatientException;
 
-import com.example.demo.entity.Patient;
 import org.hibernate.annotations.NotFound;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

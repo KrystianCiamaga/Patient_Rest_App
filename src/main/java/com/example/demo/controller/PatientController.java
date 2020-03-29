@@ -4,18 +4,13 @@ package com.example.demo.controller;
 import com.example.demo.dto.MedicineDto;
 import com.example.demo.dto.PatientDto;
 import com.example.demo.entity.Account;
-import com.example.demo.entity.Medicine;
 import com.example.demo.entity.Patient;
-import com.example.demo.exception.PatientNotFoundException;
+import com.example.demo.exception.MedicineException.MedicineNoutFoundException;
 import com.example.demo.mapper.MedicineMapper;
 import com.example.demo.repository.AccountRepository;
 import com.example.demo.repository.MedicineRepository;
 import com.example.demo.repository.PatientRepository;
 import com.example.demo.service.PatientService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -59,12 +54,9 @@ public class PatientController {
 
         String userName = principal.getName();
 
-        Long newPatient=patientService.addPatient(patientDto,userName);
-
-        return newPatient;
+        return patientService.addPatient(patientDto,userName);
 
     }
-
 
 
     @PostMapping("/medicines")
@@ -78,9 +70,6 @@ public class PatientController {
 
     }
 
-
-
-
     @GetMapping("/medicines")
     public List<MedicineDto> getMedicines(Principal principal){
 
@@ -90,8 +79,11 @@ public class PatientController {
 
         List<MedicineDto> medicineDtos=patient.get().getMedicineList()
                 .stream()
-                .map(s -> MedicineMapper.mapMedicineToMedicineDto(s))
+                .map(MedicineMapper::mapMedicineToMedicineDto)
                 .collect(Collectors.toList());
+
+        if(medicineDtos.isEmpty())
+            throw new MedicineNoutFoundException();
 
         return medicineDtos;
     }
@@ -108,14 +100,6 @@ public class PatientController {
     @PutMapping("/{id}")
     public PatientDto updatePatient(@PathVariable Long id, @RequestBody PatientDto patientDto) {
         return patientService.updatePatient(id, patientDto);
-    }
-
-
-
-    @GetMapping("/zalogowany")
-    public String zalogowany(Principal principal){
-
-        return principal.getName();
     }
 
 

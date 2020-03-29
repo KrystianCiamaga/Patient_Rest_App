@@ -20,17 +20,23 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NonNull
     private String first_name;
 
+    @NonNull
     private String last_name;
 
+    @NonNull
     private String pesel;
 
+    @NonNull
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    @NonNull
     private String phone_number;
 
+    @NonNull
     private String email;
 
     @ManyToOne
@@ -51,10 +57,6 @@ public class Patient {
     public void addMedicine(Medicine medicine){
 
         medicineList.add(medicine);
-
-
     }
-
-
 
 }

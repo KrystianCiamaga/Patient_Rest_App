@@ -31,19 +31,24 @@ public class AddressControler {
 
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public AddressDto findById(@PathVariable Long id) throws Exception {
 
         return addressService.findById(id);
 
     }
 
-
-
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public AddressDto updateAddress(@PathVariable Long id,@RequestBody AddressDto addressDto){
 
        return  addressService.updateAddress(id,addressDto);
+
+    }
+
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable Long id){
+
+        addressRepository.deleteById(id);
 
     }
 

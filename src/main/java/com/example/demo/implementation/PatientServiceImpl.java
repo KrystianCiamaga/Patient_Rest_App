@@ -6,7 +6,7 @@ import com.example.demo.dto.PatientDto;
 import com.example.demo.entity.Account;
 import com.example.demo.entity.Medicine;
 import com.example.demo.entity.Patient;
-import com.example.demo.exception.PatientNotFoundException;
+import com.example.demo.exception.PatientException.PatientNotFoundException;
 import com.example.demo.mapper.MedicineMapper;
 import com.example.demo.mapper.PatientMapper;
 import com.example.demo.repository.AccountRepository;
