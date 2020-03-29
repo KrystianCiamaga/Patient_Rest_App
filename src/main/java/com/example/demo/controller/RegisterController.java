@@ -23,9 +23,8 @@ public class RegisterController {
 
 
 
-    @PostMapping("/add/register")
+    @PostMapping("/register")
     public String register(@RequestBody AccountDto accountDto){
-
 
         Account account=accountRepository.findByLogin(accountDto.getLogin());
 

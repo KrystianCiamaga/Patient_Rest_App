@@ -30,18 +30,14 @@ public class PatientController {
 
     private PatientService patientService;
     private PatientRepository patientRepository;
-
-    @Autowired
     private AccountRepository accountRepository;
-
-    @Autowired
     private MedicineRepository medicineRepository;
 
-
-
-    public PatientController(PatientService patientService, PatientRepository patientRepository) {
+    public PatientController(PatientService patientService, PatientRepository patientRepository, AccountRepository accountRepository, MedicineRepository medicineRepository) {
         this.patientService = patientService;
         this.patientRepository = patientRepository;
+        this.accountRepository = accountRepository;
+        this.medicineRepository = medicineRepository;
     }
 
     @GetMapping
@@ -49,7 +45,8 @@ public class PatientController {
         return patientService.findAll();
     }
 
-    @GetMapping("{id}")
+
+    @GetMapping("/{id}")
     public PatientDto findById(@PathVariable Long id) throws Exception {
 
         return patientService.findById(id);
@@ -58,15 +55,16 @@ public class PatientController {
 
 
     @PostMapping("/register")
-    public Long addPatient(@RequestBody PatientDto patientDto){
+    public Long addPatient(@RequestBody PatientDto patientDto,Principal principal){
 
-        //todo change user
+        String userName = principal.getName();
 
-        Long newPatient=patientService.addPatient(patientDto,"user");
+        Long newPatient=patientService.addPatient(patientDto,userName);
 
         return newPatient;
 
     }
+
 
 
     @PostMapping("/medicines")
@@ -74,9 +72,7 @@ public class PatientController {
     {
         Account account= accountRepository.findByLogin(principal.getName());
 
-       Long newMedicineId = patientService.addMedicines(account.getPatient().getId(),medicineDto);
-
-
+       Long newMedicineId = patientService.addMedicine(account.getPatient().getId(),medicineDto);
 
        return newMedicineId;
 

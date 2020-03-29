@@ -4,6 +4,7 @@ import com.example.demo.dto.AccountDto;
 import com.example.demo.entity.Account;
 import com.example.demo.entity.Authority;
 import org.assertj.core.util.Sets;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -35,7 +36,7 @@ public class AccountMapper {
         Account account=new Account();
 
         account.setLogin(accountDto.getLogin());
-        account.setPassword(accountDto.getPassword());
+        account.setPassword(new BCryptPasswordEncoder().encode(accountDto.getPassword()));
 
         Authority authority=new Authority();
         authority.setAuthority("ROLE_USER");

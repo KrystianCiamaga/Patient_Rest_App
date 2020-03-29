@@ -15,13 +15,14 @@ import java.util.Set;
 @RequestMapping("/addresses")
 public class AddressControler {
 
-    @Autowired
-    private AddressRepository addressRepository;
 
-    @Autowired
+    private AddressRepository addressRepository;
     private AddressService addressService;
 
-
+    public AddressControler(AddressRepository addressRepository, AddressService addressService) {
+        this.addressRepository = addressRepository;
+        this.addressService = addressService;
+    }
 
     @GetMapping
     public Set<AddressDto> findAll(){
@@ -33,10 +34,10 @@ public class AddressControler {
     @GetMapping("{id}")
     public AddressDto findById(@PathVariable Long id) throws Exception {
 
-
         return addressService.findById(id);
 
     }
+
 
 
     @PutMapping("{id}")

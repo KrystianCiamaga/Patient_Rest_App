@@ -24,12 +24,8 @@ import java.util.stream.Collectors;
 @Service
 public class PatientServiceImpl implements PatientService {
 
-
-
     private PatientRepository patientRepository;
-
     private AccountRepository accountRepository;
-
     private MedicineRepository medicineRepository;
 
     public PatientServiceImpl(PatientRepository patientRepository, AccountRepository accountRepository, MedicineRepository medicineRepository) {
@@ -76,11 +72,19 @@ public class PatientServiceImpl implements PatientService {
 
 
     @Override
+    @Transactional
     public Long addPatient(PatientDto patientDto, String username) {
 
         Account account=accountRepository.findByLogin(username);
         Patient patient = account.getPatient();
-        Patient afterMapping = PatientMapper.mapPatientDtoToPatient(patient,patientDto);
+        Patient afterMapping=new Patient();
+
+        if(patient !=null){
+             afterMapping = PatientMapper.mapPatientDtoToPatient(patient,patientDto);
+        }else{
+            afterMapping = PatientMapper.mapPatientDtoToPatient(new Patient(),patientDto);
+        }
+
         account.setPatient(afterMapping);
         Account newAccount= accountRepository.save(account);
 
@@ -89,7 +93,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     @Transactional
-    public Long addMedicines(Long id, MedicineDto medicineDto) {
+    public Long addMedicine(Long id, MedicineDto medicineDto) {
 
         Medicine newMedicine=new Medicine();
         Medicine medicine = MedicineMapper.mapMedicineDtoToMedicine(newMedicine,medicineDto);
@@ -98,5 +102,13 @@ public class PatientServiceImpl implements PatientService {
         medicineRepository.save(medicine);
 
         return medicine.getId();
+    }
+
+    @Override
+    public void deleteMedicine(Long id) {
+
+
+
+
     }
 }

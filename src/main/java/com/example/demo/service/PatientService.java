@@ -21,6 +21,8 @@ public interface PatientService {
 
     Long addPatient(PatientDto patientDto, String username);
 
-    Long addMedicines(Long id, MedicineDto medicineDto);
+    Long addMedicine(Long id, MedicineDto medicineDto);
+
+    void deleteMedicine(Long id);
 
 }

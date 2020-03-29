@@ -14,7 +14,7 @@ public interface AddressService {
 
     AddressDto updateAddress(Long id, AddressDto locationDto);
 
-    void delete(Long id);
+
 
 
 

@@ -53,7 +53,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .disable()
 
 
-                .httpBasic();
+                .httpBasic()
+                .and()
+                .formLogin();
 
     }
 
