@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@RestController("/accounts")
 public class RegisterController {
 
 
@@ -37,14 +37,14 @@ public class RegisterController {
     }
 
 
-    @GetMapping("/register/{id}")
+    @GetMapping("/{id}")
     public AccountDto getById(@PathVariable Long id) {
 
         return accountService.findById(id);
 
     }
 
-    @GetMapping("/register")
+    @GetMapping("/all")
     public List<AccountDto> getAll(){
 
         return accountService.findAll();
