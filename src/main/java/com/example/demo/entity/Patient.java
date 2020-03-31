@@ -64,4 +64,8 @@ public class Patient {
         medicineList.add(medicine);
     }
 
+    public void addVisit(Visit visit){
+
+        visits.add(visit);
+    }
 }

@@ -8,4 +8,10 @@ public class PatientNotFoundException extends RuntimeException {
         super("Could not find patient with "+id+" id");
 
     }
+
+
+    public PatientNotFoundException() {
+
+        super("Could not find patient") ;
+    }
 }

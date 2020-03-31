@@ -59,6 +59,7 @@ public class PatientController {
     }
 
 
+
     @PostMapping("/medicines")
     public Long addMedicine(@RequestBody MedicineDto medicineDto,Principal principal)
     {
@@ -69,6 +70,9 @@ public class PatientController {
        return newMedicineId;
 
     }
+
+
+
 
     @GetMapping("/medicines")
     public List<MedicineDto> getMedicines(Principal principal){
