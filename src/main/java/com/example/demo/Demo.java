@@ -41,6 +41,9 @@ public class Demo implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
 
+
+
+
         Patient patient=new Patient();
 
         patient.setEmail("adrian@o2.pl");
