@@ -8,10 +8,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.*;
 
 
 @Service
@@ -41,6 +41,13 @@ public class Demo implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
 
+        Visit visit=new Visit();
+        visit.setDoctorsOfficeNumber(10);
+        visit.setVisitDate(LocalDateTime.of(2002, Month.MARCH, 1, 1, 1).toLocalDate());
+
+
+
+
         Patient patient=new Patient();
 
         patient.setEmail("adrian@o2.pl");
@@ -49,6 +56,8 @@ public class Demo implements CommandLineRunner {
         patient.setPesel("7537457");
         patient.setLast_name("Kowalski");
         patient.setPhone_number("63434734734");
+
+        patient.setVisits(Collections.singletonList(visit));
 
 
         Address address=new Address();

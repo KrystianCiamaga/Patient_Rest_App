@@ -24,10 +24,12 @@ public class Visit {
     @GeneratedValue
     private Long id;
 
+
+    private int doctorsOfficeNumber;
+
     private LocalDate visitDate;
 
-
-    @ManyToOne
+    @ManyToOne()
     private Patient patient;
 
 

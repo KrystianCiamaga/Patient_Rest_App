@@ -42,6 +42,11 @@ public class Patient {
     @ManyToOne
     private Address address;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name ="patients_visits",
+    joinColumns = @JoinColumn(name = "patient_id"),inverseJoinColumns = @JoinColumn(name = "vistit_id"))
+    private List<Visit> visits;
+
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "patients_medicines",
