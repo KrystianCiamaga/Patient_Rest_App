@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.mail.MessagingException;
 
-@RestController
+
 public class MailApp {
 
     private MailService mailService;
@@ -14,7 +14,6 @@ public class MailApp {
         this.mailService = mailService;
     }
 
-    @GetMapping("/sendmail")
     public String sendMail() throws MessagingException{
 
         mailService.sendMail("dupa@gmail.com",   "Wygrałeś",
@@ -23,4 +22,6 @@ public class MailApp {
         return "wwygrales";
 
     }
+
+
 }

@@ -3,16 +3,20 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.MedicineDto;
 import com.example.demo.dto.PatientDto;
+import com.example.demo.email.MailService;
 import com.example.demo.entity.Account;
 import com.example.demo.entity.Patient;
 import com.example.demo.exception.MedicineException.MedicineNoutFoundException;
 import com.example.demo.mapper.MedicineMapper;
+import com.example.demo.mapper.PatientMapper;
 import com.example.demo.repository.AccountRepository;
 import com.example.demo.repository.MedicineRepository;
 import com.example.demo.repository.PatientRepository;
 import com.example.demo.service.PatientService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +31,9 @@ public class PatientController {
     private PatientRepository patientRepository;
     private AccountRepository accountRepository;
     private MedicineRepository medicineRepository;
+
+    @Autowired
+    private MailService mailService;
 
     public PatientController(PatientService patientService, PatientRepository patientRepository, AccountRepository accountRepository, MedicineRepository medicineRepository) {
         this.patientService = patientService;
@@ -105,6 +112,21 @@ public class PatientController {
     public PatientDto updatePatient(@PathVariable Long id, @RequestBody PatientDto patientDto) {
         return patientService.updatePatient(id, patientDto);
     }
+
+   /* @GetMapping("/wyslij")
+    public void wyslij() throws MessagingException {
+
+        Patient patient=patientRepository.getOne(2L);
+
+
+        mailService.sendMail(patient.getEmail(),
+                "tytuł",
+                "dupa dupa dupa",
+                true);
+
+        //return "udalo";
+
+    }*/
 
 
 
