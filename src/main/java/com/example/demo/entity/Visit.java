@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -27,7 +28,7 @@ public class Visit {
 
     private int doctorsOfficeNumber;
 
-    private LocalDate visitDate;
+    private LocalDateTime visitDate;
 
     @ManyToOne()
     private Patient patient;

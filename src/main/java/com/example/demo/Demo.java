@@ -43,7 +43,7 @@ public class Demo implements CommandLineRunner {
 
         Visit visit=new Visit();
         visit.setDoctorsOfficeNumber(10);
-        visit.setVisitDate(LocalDateTime.of(2002, Month.MARCH, 1, 1, 1).toLocalDate());
+        visit.setVisitDate(LocalDateTime.of(2002, Month.MARCH, 1, 1, 1));
 
 
 
