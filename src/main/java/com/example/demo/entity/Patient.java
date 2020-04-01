@@ -4,6 +4,7 @@ import com.example.demo.enums.Gender;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.List;
 
 @Entity
@@ -37,6 +38,7 @@ public class Patient {
     private String phone_number;
 
     @NonNull
+    @Email
     private String email;
 
     @ManyToOne

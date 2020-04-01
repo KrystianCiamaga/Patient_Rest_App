@@ -18,13 +18,15 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
+    @NonNull
     private String place;
 
     private String zipp_code;
 
+    @NonNull
     private String house_number;
 
+    @NonNull
     private String country;
 
     @OneToMany(mappedBy = "address",cascade = CascadeType.ALL)
