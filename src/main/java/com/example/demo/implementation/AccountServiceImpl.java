@@ -9,6 +9,7 @@ import com.example.demo.repository.TokenRepository;
 import com.example.demo.service.AccountService;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -51,11 +52,10 @@ public class AccountServiceImpl implements AccountService {
 
 
     @Override
-    public Long addAccount(AccountDto accountDto) {
+    public Long addAccount(AccountDto accountDto) throws MessagingException {
 
         Account account=accountRepository.save(AccountMapper.mapAccountDtoToAccount(accountDto));
-
-
+        mailService.sendNewAccountToken(account);
 
         return account.getId();
 

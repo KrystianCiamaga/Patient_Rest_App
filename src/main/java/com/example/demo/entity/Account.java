@@ -28,6 +28,9 @@ public class Account {
     @NotNull
     private String password;
 
+    @NotNull
+    private String email;
+
     @OneToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private Patient patient;
 

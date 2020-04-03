@@ -22,6 +22,7 @@ public class AccountMapper {
 
             accountDto.setLogin(account.getLogin());
             accountDto.setPassword(account.getPassword());
+            accountDto.setEmail(account.getEmail());
 
         }
 
@@ -37,6 +38,8 @@ public class AccountMapper {
 
         account.setLogin(accountDto.getLogin());
         account.setPassword(new BCryptPasswordEncoder().encode(accountDto.getPassword()));
+
+        account.setEmail(accountDto.getEmail());
 
         Authority authority=new Authority();
         authority.setAuthority("ROLE_USER");

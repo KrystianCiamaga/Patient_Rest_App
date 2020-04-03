@@ -50,7 +50,7 @@ public class Demo implements CommandLineRunner {
 
         Patient patient=new Patient();
 
-        patient.setEmail("adrian@o2.pl");
+        patient.setEmail("petient1@email.com");
         patient.setFirst_name("Jarek");
         patient.setGender(Gender.Male);
         patient.setPesel("7537457");
@@ -72,6 +72,7 @@ public class Demo implements CommandLineRunner {
 
         account.setPassword(passwordEncoder.encode("password"));
         account.setLogin("user");
+        account.setEmail("account1@o2.pl");
         //account.setActive(true);
 
 
@@ -120,12 +121,12 @@ public class Demo implements CommandLineRunner {
 
         Patient patient1=new Patient();
 
-        patient1.setEmail("wojon@o2.pl");
         patient1.setFirst_name("Ola");
         patient1.setGender(Gender.Female);
         patient1.setPesel("75323632");
         patient1.setLast_name("Kowalska");
         patient1.setPhone_number("63434734734");
+        patient1.setEmail("patient2@o2.pl");
 
         Authority authority1=new Authority();
 
@@ -136,6 +137,7 @@ public class Demo implements CommandLineRunner {
         secik2.add(authority1);
 
         account1.setAuthoritySet(secik2);
+        account1.setEmail("account2@o2.pl");
 
         //patient1.setMedicineList(lista);
 

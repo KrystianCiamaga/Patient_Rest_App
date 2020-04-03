@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -57,7 +59,7 @@ public class MailService {
 
     }
 
-    public void sendNewAccountToken(Account account){
+    public void sendNewAccountToken(Account account) throws MessagingException {
 
         String tokenValue= UUID.randomUUID().toString();
 
@@ -65,6 +67,10 @@ public class MailService {
         token.setValue(tokenValue);
         token.setAccount(account);
         tokenRepository.save(token);
+
+        String url="http://localhost:8080/accounts/token?value="+tokenValue;
+
+        sendMail(account.getEmail(),"Confirm registration",url,false);
 
 
 
