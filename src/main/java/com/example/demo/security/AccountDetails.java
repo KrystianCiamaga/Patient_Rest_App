@@ -23,10 +23,6 @@ public class AccountDetails  extends Account implements UserDetails {
         this.getAuthoritySet().stream()
                 .forEach(s ->list.add(new SimpleGrantedAuthority(s.getAuthority())));
 
-
-
-
-
         return list;
     }
 
@@ -54,6 +50,6 @@ public class AccountDetails  extends Account implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.isActive();
     }
 }

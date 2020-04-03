@@ -13,6 +13,7 @@ public class UserDetailsMapper {
         accountDetails.setLogin(account.getLogin());
         accountDetails.setPassword(account.getPassword());
         accountDetails.setAuthoritySet(account.getAuthoritySet());
+        accountDetails.setActive(account.isActive());
 
         return accountDetails;
 

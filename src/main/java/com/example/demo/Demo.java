@@ -72,7 +72,7 @@ public class Demo implements CommandLineRunner {
 
         account.setPassword(passwordEncoder.encode("password"));
         account.setLogin("user");
-        account.setEnabled(true);
+        account.setActive(true);
 
 
         Authority nowa=new Authority();
@@ -115,7 +115,7 @@ public class Demo implements CommandLineRunner {
 
         account1.setPassword(passwordEncoder.encode("password"));
         account1.setLogin("ola");
-        account1.setEnabled(true);
+        account1.setActive(true);
 
 
         Patient patient1=new Patient();

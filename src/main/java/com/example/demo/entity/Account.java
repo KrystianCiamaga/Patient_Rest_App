@@ -34,7 +34,7 @@ public class Account {
     @OneToMany(mappedBy = "account",fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private Set<Authority> authoritySet;
 
-    private boolean isEnabled;
+    private boolean active;
 
 
 
