@@ -46,8 +46,7 @@ public class VisitController {
 
         Long visitId =visitService.addVisit(principal.getName(),visitDto);
 
-
-       String a= mailService.sendNewVisit(principal.getName(),visitDto);
+        mailService.sendNewVisit(principal.getName(),visitDto);
 
 
         return visitId;

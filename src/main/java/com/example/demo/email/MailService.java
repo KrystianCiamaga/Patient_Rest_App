@@ -39,7 +39,9 @@ public class MailService {
 
     }
 
-    public String sendNewVisit(String userName, VisitDto visitDto) throws MessagingException {
+
+
+    public void sendNewVisit(String userName, VisitDto visitDto) throws MessagingException {
 
         Patient patient = patientRepository.findByAccount_Login(userName).orElseThrow(PatientNotFoundException::new);
         String mailContent = "Hello "+patient.getFirst_name()+" "+patient.getLast_name()+".\n"+
@@ -49,9 +51,9 @@ public class MailService {
         sendMail(patient.getEmail(),"You have a new visit.",
                 mailContent,true);
 
-        return "Mailed";
-
     }
+
+
 
 
 }
