@@ -1,10 +1,13 @@
 package com.example.demo.email;
 
 import com.example.demo.dto.VisitDto;
+import com.example.demo.entity.Account;
 import com.example.demo.entity.Patient;
+import com.example.demo.entity.Token;
 import com.example.demo.exception.PatientException.PatientNotFoundException;
 import com.example.demo.repository.AccountRepository;
 import com.example.demo.repository.PatientRepository;
+import com.example.demo.repository.TokenRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -21,7 +25,7 @@ public class MailService {
 
     private JavaMailSender javaMailSender;
     private PatientRepository patientRepository;
-
+    private TokenRepository tokenRepository;
 
 
     public void sendMail(String to,
@@ -52,6 +56,22 @@ public class MailService {
                 mailContent,true);
 
     }
+
+    public void sendNewAccountToken(Account account){
+
+        String tokenValue= UUID.randomUUID().toString();
+
+        Token token = new Token();
+        token.setValue(tokenValue);
+        token.setAccount(account);
+        tokenRepository.save(token);
+
+
+
+
+
+    }
+
 
 
 

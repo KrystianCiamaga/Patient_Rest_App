@@ -72,7 +72,7 @@ public class Demo implements CommandLineRunner {
 
         account.setPassword(passwordEncoder.encode("password"));
         account.setLogin("user");
-        account.setActive(true);
+        //account.setActive(true);
 
 
         Authority nowa=new Authority();

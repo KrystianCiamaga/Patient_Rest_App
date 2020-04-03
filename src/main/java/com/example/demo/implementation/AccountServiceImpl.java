@@ -1,9 +1,11 @@
 package com.example.demo.implementation;
 
 import com.example.demo.dto.AccountDto;
+import com.example.demo.email.MailService;
 import com.example.demo.entity.Account;
 import com.example.demo.mapper.AccountMapper;
 import com.example.demo.repository.AccountRepository;
+import com.example.demo.repository.TokenRepository;
 import com.example.demo.service.AccountService;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +18,13 @@ public class AccountServiceImpl implements AccountService {
 
 
     private AccountRepository accountRepository;
+    private MailService mailService;
+    private TokenRepository tokenRepository;
 
-    public AccountServiceImpl(AccountRepository accountRepository) {
+    public AccountServiceImpl(AccountRepository accountRepository, MailService mailService, TokenRepository tokenRepository) {
         this.accountRepository = accountRepository;
+        this.mailService = mailService;
+        this.tokenRepository = tokenRepository;
     }
 
     @Override
@@ -47,8 +53,9 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Long addAccount(AccountDto accountDto) {
 
-
         Account account=accountRepository.save(AccountMapper.mapAccountDtoToAccount(accountDto));
+
+
 
         return account.getId();
 

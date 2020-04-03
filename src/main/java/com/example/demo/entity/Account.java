@@ -37,7 +37,4 @@ public class Account {
     private boolean active;
 
 
-
-
-
 }

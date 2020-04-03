@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 
 import com.example.demo.dto.AccountDto;
+import com.example.demo.email.MailService;
 import com.example.demo.entity.Account;
 import com.example.demo.repository.AccountRepository;
 import com.example.demo.service.AccountService;
@@ -17,12 +18,13 @@ public class RegisterController {
 
     private AccountService accountService;
     private AccountRepository accountRepository;
+    private MailService mailService;
 
-    public RegisterController(AccountService accountService, AccountRepository accountRepository) {
+    public RegisterController(AccountService accountService, AccountRepository accountRepository, MailService mailService) {
         this.accountService = accountService;
         this.accountRepository = accountRepository;
+        this.mailService = mailService;
     }
-
 
     @PostMapping("/register")
     public String register(@RequestBody AccountDto accountDto) {
@@ -31,11 +33,20 @@ public class RegisterController {
 
         if (account == null) {
             Long a = accountService.addAccount(accountDto);
+
+
             return "Added correctly";
         }
 
         return "Account already exist";
     }
+
+
+
+
+
+
+
 
 
     @GetMapping("/{id}")
